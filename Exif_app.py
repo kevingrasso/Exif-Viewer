@@ -1,8 +1,8 @@
 import sys
+import PyQt5
 from PyQt5.QtWidgets import QApplication
 from views.MainView import MainWindow
 from model.Model import Model
-# from pyqt5_material import apply_stylesheet
 
 
 class App(QApplication):
@@ -21,6 +21,5 @@ if __name__ == '__main__':
     with open(css, "r") as fh:
         app.setStyleSheet(fh.read())
 
-    # apply_stylesheet(app, theme='dark_blue.xml')
     sys.exit(app.exec_())
 
