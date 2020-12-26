@@ -1,7 +1,9 @@
 from PyQt5 import QtCore
 from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QAbstractItemView, QHeaderView, QShortcut, QPushButton, QHBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QAbstractItemView, QHeaderView, QShortcut, QPushButton, \
+    QHBoxLayout, QDialog
 from views.Ui_MainWindow import Ui_MainWindow
+from views.Ui_Dialog import Ui_Dialog
 
 
 MAX_WIDTH = 512
@@ -14,6 +16,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._model = model
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
+        self._aboutDialog = AboutDialog()
+
+
 
         self.initialize()
         # self._open_btn = QPushButton('Open File', self._ui.img_label)
@@ -22,6 +27,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._open_btn.clicked.connect(self.open_slot)
         self._ui.actionOpen_file.triggered.connect(self.open_slot)
         self._ui.actionExit.triggered.connect(self.close)
+        self._ui.actioninfo.triggered.connect(self._aboutDialog.exec_)
         self._quit = QShortcut(QKeySequence("esc"), self)
         self._quit.activated.connect(self.close)
 
@@ -52,7 +58,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._ui.gps_button.setEnabled(False)
 
         self._open_btn = QPushButton('Open File', self._ui.img_label)
-
+        self.adjustSize()
 
     @QtCore.pyqtSlot()
     def open_slot(self):
@@ -77,13 +83,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self._ui.bt_next.setEnabled(False)
             self._ui.bt_prev.setEnabled(False)
 
-
         self.refresh_images()
 
     @QtCore.pyqtSlot()
     def refresh_images(self, index=0, angle=0, resize=False):
         if self._model.filenames() is None:
             self._open_btn.setVisible(True)
+            x = (self._ui.img_label.width() / 2) - (self._open_btn.width() / 2)
+            y = (self._ui.img_label.height() / 2) - (self._open_btn.height() / 2)
+            self._open_btn.move(x, y)
         else:
             self._open_btn.setVisible(False)
             pixmap, name_file = self._model.gen_pixmap(self._ui.img_label.width(), self._ui.img_label.height(), index, angle, resize)
@@ -108,3 +116,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def resizeEvent(self, event):
         self.refresh_images(resize=True)
         QMainWindow.resizeEvent(self, event)
+
+
+class AboutDialog(QDialog):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Set up the user interface from Designer.
+        self.ui = Ui_Dialog()
+        self.ui.setupUi(self)
