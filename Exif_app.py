@@ -1,5 +1,5 @@
+"""Main class of the application"""
 import sys
-import PyQt5
 from PyQt5.QtWidgets import QApplication
 from views.MainView import MainWindow
 from model.Model import Model
@@ -22,4 +22,3 @@ if __name__ == '__main__':
         app.setStyleSheet(fh.read())
 
     sys.exit(app.exec_())
-

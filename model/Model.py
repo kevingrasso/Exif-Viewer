@@ -30,7 +30,9 @@ class Model(QObject):
         self._current_image = None
         self.imgQ = None
 
+
     def filenames(self):
+        """Return the pathname of the KOS root directory."""
         return self._filenames
 
     def set_filenames(self, val):
