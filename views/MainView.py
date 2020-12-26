@@ -18,8 +18,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._ui.setupUi(self)
         self._aboutDialog = AboutDialog()
 
-
-
         self.initialize()
         # self._open_btn = QPushButton('Open File', self._ui.img_label)
         # self._open_btn.clicked.connect(self.open_slot)
