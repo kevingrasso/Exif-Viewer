@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 from PyQt5.QtGui import QKeySequence
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QAbstractItemView, QHeaderView, QShortcut, QPushButton, \
-    QHBoxLayout, QDialog
+    QDialog
 from views.Ui_MainWindow import Ui_MainWindow
 from views.Ui_Dialog import Ui_Dialog
 
