@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QMainWindow, QFileDialog, QAbstractItemView, QHeaderView, QShortcut, QPushButton, \
-    QDialog
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QAbstractItemView, \
+    QHeaderView, QShortcut, QPushButton, QDialog
 from views.Ui_MainWindow import Ui_MainWindow
 from views.Ui_Dialog import Ui_Dialog
 
@@ -19,9 +19,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._aboutDialog = AboutDialog()
 
         self.initialize()
-        # self._open_btn = QPushButton('Open File', self._ui.img_label)
-        # self._open_btn.clicked.connect(self.open_slot)
-        # self._open_btn.setVisible(False)
         self._open_btn.clicked.connect(self.open_slot)
         self._ui.actionOpen_file.triggered.connect(self.open_slot)
         self._ui.actionExit.triggered.connect(self.close)
@@ -48,6 +45,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._ui.gps_button.clicked.connect(self._model.open_location)
 
     def initialize(self):
+        """Set the buttons to not clickable when the application starts"""
         self._ui.img_name.setText('No files selected')
         self._ui.bt_next.setEnabled(False)
         self._ui.bt_prev.setEnabled(False)
@@ -60,6 +58,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def open_slot(self):
+        """This function open the file dialog"""
         caption = 'Open files'
         directory = './'
         filter_mask = "JPEG File Interchange Format (*.jpg *.jpeg *jfif)|" + "*.jpg;*.jpeg;*.jfif"
@@ -85,6 +84,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def refresh_images(self, index=0, angle=0, resize=False):
+        """This function reload the view of the image """
         if self._model.filenames() is None:
             self._open_btn.setVisible(True)
             x = (self._ui.img_label.width() / 2) - (self._open_btn.width() / 2)
@@ -92,11 +92,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self._open_btn.move(x, y)
         else:
             self._open_btn.setVisible(False)
-            pixmap, name_file = self._model.gen_pixmap(self._ui.img_label.width(), self._ui.img_label.height(), index, angle, resize)
+            pixmap, name_file = self._model.gen_pixmap(self._ui.img_label.width(), \
+                 self._ui.img_label.height(), index, angle, resize)
             self._ui.img_label.setPixmap(pixmap)
             self._ui.img_name.setText(name_file)
 
-            if angle == 0 and resize == False:
+            if angle == 0 and resize is not True:
                 self._ui.tableView.setModel(self._model.get_data())
                 self._ui.tableView.setEditTriggers(QAbstractItemView.NoEditTriggers)
                 self._ui.tableView.setSelectionMode(QAbstractItemView.NoSelection)
@@ -112,6 +113,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     self._ui.gps_button.setText('View Location')
 
     def resizeEvent(self, event):
+        """Reimplementation of the resize event with the call to refresh_images"""
         self.refresh_images(resize=True)
         QMainWindow.resizeEvent(self, event)
 

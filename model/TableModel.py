@@ -3,6 +3,7 @@ from PyQt5.QtCore import Qt
 
 
 class TableModel(QStandardItemModel):
+    """Reimplementation of Table Model to adapt to our data"""
 
     def __init__(self, data):
         super(TableModel, self).__init__(len(data), len(data[0]))

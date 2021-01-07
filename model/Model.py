@@ -10,6 +10,7 @@ MAX_HEIGHT = 512
 
 
 def _convert_to_degrees(value):
+    """Convert the gps data of the exif to format searchable on google maps"""
     deg = float(value[0])
     minute = float(value[1])
     sec = float(value[2])
@@ -17,6 +18,7 @@ def _convert_to_degrees(value):
 
 
 def get_exif(img):
+    """return all exif data of the image"""
     return [[ExifTags.TAGS[k], v]  for k, v in img._getexif().items() if k in ExifTags.TAGS]
 
 
@@ -32,10 +34,11 @@ class Model(QObject):
 
 
     def filenames(self):
-        """Return the pathname of the KOS root directory."""
+        """Return the filename of the image"""
         return self._filenames
 
     def set_filenames(self, val):
+        """Set the filename of the image"""
         if len(val) != 0:
             self._filenames = val
             self._current_index = 0
@@ -62,6 +65,7 @@ class Model(QObject):
         return self._pixmap, self._filenames[self._current_index].split('/')[-1]
 
     def get_data(self):
+        """return the model to be loaded on table"""
         if self._current_image is not None:
             self._current_image.load()
             exif = get_exif(self._current_image)
@@ -85,6 +89,7 @@ class Model(QObject):
             return None
 
     def open_location(self):
+        """This function shows the location on the browser"""
         gps = self.get_gps_info()
         if gps is not None:
             webbrowser.open_new('https://www.google.com/maps/search/?api=1&query=' + gps)
