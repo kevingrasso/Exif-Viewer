@@ -42,6 +42,8 @@ I used pyqt5 for the implementation of the interface and Pillow library to retri
 
 \[3\] https://pillow.readthedocs.io/en/stable/
 
+\[4\]https://github.com/ianare/exif-samples/tree/master/jpg/gps
+
 
 ## Install the dependencies
 ```bash
