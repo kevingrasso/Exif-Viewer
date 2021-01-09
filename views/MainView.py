@@ -6,10 +6,6 @@ from views.Ui_MainWindow import Ui_MainWindow
 from views.Ui_Dialog import Ui_Dialog
 
 
-MAX_WIDTH = 512
-MAX_HEIGHT = 512
-
-
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, model):
         super().__init__()
@@ -121,6 +117,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 class AboutDialog(QDialog):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # Set up the user interface from Designer.
+        """Set up the user interface from Designer."""
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
