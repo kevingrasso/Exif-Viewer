@@ -10,9 +10,9 @@ In this assignment it was implemented an Image and EXIF Metadata Viewer using py
 
 # Requirements
 
-- **Pyhton version**: Python 3.8.3  \[\1]
-- **Pyqt5**: Pyqt 5.15.2  \[\2]
-- **Pillow**: Pillow 7.2.0  \[\3]
+- **Python version**: Python 3.8.3  \[1\]
+- **Pyqt5**: Pyqt 5.15.2  \[2\]
+- **Pillow**: Pillow 7.2.0  \[3\]
 
 
 # Summary
