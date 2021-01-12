@@ -15,6 +15,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self._aboutDialog = AboutDialog()
 
         self.initialize()
+        
         self._open_btn.clicked.connect(self.open_slot)
         self._ui.actionOpen_file.triggered.connect(self.open_slot)
         self._ui.actionExit.triggered.connect(self.close)
@@ -54,7 +55,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     @QtCore.pyqtSlot()
     def open_slot(self):
-        """This function open the file dialog"""
+        """This function open the file dialog and sets visibility of the buttons"""
         caption = 'Open files'
         directory = './'
         filter_mask = "JPEG File Interchange Format (*.jpg *.jpeg *jfif)|" + "*.jpg;*.jpeg;*.jfif"
@@ -82,11 +83,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def refresh_images(self, index=0, angle=0, resize=False):
         """This function reload the view of the image """
         if self._model.filenames() is None:
+            """Set to visible the open button and centered it in the image_label"""
             self._open_btn.setVisible(True)
             x = (self._ui.img_label.width() / 2) - (self._open_btn.width() / 2)
             y = (self._ui.img_label.height() / 2) - (self._open_btn.height() / 2)
             self._open_btn.move(x, y)
         else:
+            """Set open button visibility to false, and show the image in the image_label"""
             self._open_btn.setVisible(False)
             pixmap, name_file = self._model.gen_pixmap(self._ui.img_label.width(), \
                  self._ui.img_label.height(), index, angle, resize)

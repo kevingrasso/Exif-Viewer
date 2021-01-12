@@ -56,7 +56,7 @@ class Model(QObject):
                 self._current_index = len(self._filenames) - 1
 
             if angle != 0:
-                """rotate the image by an 'angle'  """
+                """rotate the image by an 'angle' of 90° or -90° """
                 self._current_image = self._current_image.rotate(angle=angle, expand=True)
 
             if not resize and angle == 0:
