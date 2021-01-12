@@ -18,6 +18,16 @@ In this assignment it was implemented an Image and EXIF Metadata Viewer using py
 # Summary
 I used pyqt5 for the implementation of the interface and Pillow library to retrieve the information regarding Exif Metadata of an image, and to make operations with images, like rotation and resizing.
 
+# Features
+- Support visualization of JPEG images, that will be scaled to have a maximum dimension of 512 pixels.
+- Visualization of all EXIF tags encoded in the JPEG file.
+- Support rescaling of the image with the window scaling.
+- Support to rotation of the image in 90° increments.
+
+# Extra Features
+- Support the Geolocalization, if the image has GPS Geolocation Tags, can click a button which redirects to Google Maps location in your browser.
+- Can open multiple images from file selector and switch between them through a button (next and prev).
+
 # Files
 ```bash
 |---model
