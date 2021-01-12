@@ -78,7 +78,7 @@ class Model(QObject):
     def get_gps_info(self):
         """return gps info from exif data in the form 'latitude,longitude' """
         gps = {}
-        for k, v in self._current_image._getexif().items():
+        for k, v in Image.open(self._filenames[self._current_index])._getexif().items():
             for k1, v1 in ExifTags.TAGS.items():
                 if k == k1 and v1 == 'GPSInfo':
                     gps = v
